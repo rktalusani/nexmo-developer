@@ -22,7 +22,7 @@ In this document you can learn about:
 
 ## Concepts
 
-* **Authentication** - interaction with the Audit API are authenticated using Basic Authentication or using JWTs. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests. You can also use JWTs created using your `NEXMO_APPLICATION_ID` and your private key.
+* **Authentication** - interactions with the Audit API are authenticated using Basic Authentication. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests.
 
 For more information see [authenticating your applications](/concepts/guides/authentication).
 
