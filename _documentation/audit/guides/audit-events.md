@@ -39,7 +39,7 @@ When you retrieve Audit Events objects via the API they will each have an `event
 
 For example, for a `NUMBER_UPDATED` event type the event object would resemble the following:
 
-```
+``` json
     {
         "_links": {
           "self": {
