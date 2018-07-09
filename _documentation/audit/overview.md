@@ -48,7 +48,7 @@ The [Audit API](/api/audit). With this API you can:
 * Retrieve a list of Audit events.
 * Retrieve a specific Audit event.
 
-This example shows you how to get started with the Audit API:
+This example shows you how to get started with the Audit API. It will retrieve a list of audit events:
 
 ```building_blocks
 source: '_examples/audit/get-audit-events'
