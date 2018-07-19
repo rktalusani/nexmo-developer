@@ -3,38 +3,37 @@ require 'diffy'
 class RepoDiff
 
   @cache_dir = "#{Rails.root}/tmp/foo"
+  @pre_dir = "original"
+  @post_dir = "updated"
 
   def self.run
+    @output = []
+
     # What path are we running a diff against?
     path = ".repos"
 
     # Generate before
-    self.generate(path, "original")
+    self.generate(path, @pre_dir)
     # Update the repos
     Repos.update
     # Generate after
-    self.generate(path, "updated")
+    self.generate(path, @post_dir)
 
     # Perform a diff between each file
-    self.run_diff
+    self.run_diff(path)
+    self.check_for_new_files(path)
 
     self.report_cli
   end
 
-  def self.run_diff
-    path = ".repos"
-    mode = "original"
-    files = Dir.glob("#{@cache_dir}/#{mode}/#{path}/**/*").select { |file_name| File.file?(file_name) }
+  def self.run_diff(path)
+    files = Dir.glob("#{@cache_dir}/#{@pre_dir}/#{path}/**/*").select { |file_name| File.file?(file_name) }
 
-    # We want unique paths
-    files.uniq!
-
-    @output = []
     files.each do |f|
-      rel_path = f.gsub("#{@cache_dir}/#{mode}/", "")
+      rel_path = f.gsub("#{@cache_dir}/#{@pre_dir}/", "")
 
-      base_document = "#{@cache_dir}/original/#{rel_path}"
-      compare_document = "#{@cache_dir}/updated/#{rel_path}"
+      base_document = "#{@cache_dir}/#{@pre_dir}/#{rel_path}"
+      compare_document = "#{@cache_dir}/#{@post_dir}/#{rel_path}"
 
       diff_response = Diffy::Diff.new(base_document, compare_document, context: 0, source: 'files').to_s("text")
       unless diff_response.empty? || diff_response == "\n"
@@ -43,16 +42,17 @@ class RepoDiff
           diff: diff_response,
         }
       end
-
     end
+  end
 
-    # It may be the case that something was added. We need to check if it exists in updated but not original
-    files = Dir.glob("#{@cache_dir}/updated/#{path}/**/*").select { |file_name| File.file?(file_name) }
+  def self.check_for_new_files(path)
+    # It may be the case that something was added. We need to check if it exists in post_dir but not pre_dir
+    files = Dir.glob("#{@cache_dir}/#{@post_dir}/#{path}/**/*").select { |file_name| File.file?(file_name) }
     files.each do |f|
-      rel_path = f.gsub("#{@cache_dir}/updated/", "")
+      rel_path = f.gsub("#{@cache_dir}/#{@post_dir}/", "")
 
-      base_document = "#{@cache_dir}/original/#{rel_path}"
-      compare_document = "#{@cache_dir}/updated/#{rel_path}"
+      base_document = "#{@cache_dir}/#{@pre_dir}/#{rel_path}"
+      compare_document = "#{@cache_dir}/#{@post_dir}/#{rel_path}"
       unless File.exist?(base_document)
         @output << {
           path: rel_path,
