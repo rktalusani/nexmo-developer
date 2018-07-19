@@ -23,7 +23,8 @@ class RepoDiff
     self.run_diff(path)
     self.check_for_new_files(path)
 
-    self.report_cli
+    #self.report_cli
+    self.report_pull_request
   end
 
   def self.run_diff(path)
@@ -71,10 +72,6 @@ class RepoDiff
     # We use force here to prevent an exception if the dir doesn't exist
     FileUtils.rm_r diff_dir, :force => true
 
-    ####################################################
-    # We're now in a position to start running things!
-    ####################################################
-
     # Grab all files (and files only)
     files = Dir.glob("#{Rails.root}/#{path}/**/*").select { |file_name| File.file?(file_name) }
 
@@ -106,6 +103,44 @@ class RepoDiff
       end
 
       exit 1
+    else
+      puts 'No changes detected'.colorize(:green)
+    end
+
+   def self.report_pull_request
+    if @output.any?
+      time = Time.new.to_i
+      branch = "code-example-update-#{time}"
+      puts "Checking out new branch - #{branch}".colorize(:yellow)
+      system "git checkout -b #{branch}"
+      puts 'Adding repo files'.colorize(:yellow)
+      system 'git add .repos'
+      puts 'Commiting changes'.colorize(:yellow)
+      system "git commit -m 'Automated: Updating code examples'"
+      puts 'Pushing'.colorize(:yellow)
+      system "git push git@github.com:Nexmo/nexmo-developer.git #{branch}"
+
+      body =  "#{@output.size} changes detected\n\n"
+      @output.reject.each do |result|
+        body << <<~HEREDOC
+          - [ ] `#{result[:path]}`
+
+          ```diff
+          #{result[:diff]}
+          ```
+
+        HEREDOC
+      end
+
+      puts "Notifying Nexmo Developer of branch - #{branch}".colorize(:yellow)
+      RestClient.post ENV['OPEN_PULL_REQUEST_ENDPOINT'], {
+        'branch' => branch,
+        'body' => body,
+        'secret' => ENV['CI_SECRET'],
+      }.to_json, {
+        content_type: :json,
+        accept: :json,
+      }
     else
       puts 'No changes detected'.colorize(:green)
     end
