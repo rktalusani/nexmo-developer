@@ -15,7 +15,7 @@ Key | Description
 -- | --
 `NEXMO_API_KEY` | Your Nexmo API key.
 `NEXMO_API_SECRET` | Your Nexmo API secret.
-`UUID` | The UUID of the audit event you want to retrieve.
+`EVENT_UUID` | The UUID of the audit event you want to retrieve.
 
 
 ```building_blocks
