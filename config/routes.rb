@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/jobs/code_example_push', to: 'jobs#code_example_push'
   post '/jobs/open_pull_request', to: 'jobs#open_pull_request'
 
+  get '/coverage', to: 'dashboard#coverage'
   get '/stats', to: 'dashboard#stats'
 
   get '/tutorials', to: 'tutorials#index'
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
   get '/*product/tutorials', to: 'tutorials#index', constraints: DocumentationConstraint.product_with_parent
 
   get '/documentation', to: 'static#documentation'
+
+  get '/hansel', to: 'static#podcast'
 
   get '/legacy', to: 'static#legacy'
   get '/team', to: 'static#team'
