@@ -8,6 +8,8 @@ description: A guide to Audit Events.
 
 Audit Events are generated automatically by Nexmo as the user interacts with either the Nexmo API or the Nexmo Dashboard. Each Audit Event object has a type and assocaited metadata.
 
+## Audit Event types 
+
 The following table lists all the supported Audit Event types:
 
 | Audit Event Type | Description |
