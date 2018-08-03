@@ -58,7 +58,7 @@ application:
 
 ## Guides
 
-* [Audit events](guides/audit-events): Audit events.
+* [Audit events](guides/audit-events): Audit events concepts, including types and structure of audit events.
 
 ## Building Blocks
 
