@@ -58,12 +58,12 @@ application:
 
 ## Guides
 
-* [Audit events](guides/audit-events): Audit events concepts, including types and structure of audit events.
+* [Audit events](/guides/audit-events): Audit events concepts, including types and structure of audit events.
 
 ## Building Blocks
 
-* [Get Audit events](/audit/building-blocks/get-audit-events)
-* [Get Audit event](/audit/building-blocks/get-audit-event)
+* [Get Audit events](/audit/building-blocks/get-events)
+* [Get Audit event](/audit/building-blocks/get-event)
 
 ## Tutorials
 
