@@ -23,7 +23,7 @@ paths:
     get:
       summary: Retrieve audit events
       description: >
-        Get a series of audit log events describing changes made to your
+        Get a series of audit events describing changes made to your
         Nexmo account over time.
       parameters:
         - name: event_type
@@ -51,11 +51,10 @@ paths:
     get:
       summary: Retrieve individual audit event
       description: >
-        Get a series of audit log events describing changes made to your
-        Nexmo account over time.
+        Get the specified audit event.
       parameters:
         - name: id
-          description: The UUID of the event
+          description: The UUID of the audit event to retrieve
           in: path
           required: true
           example: "aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
