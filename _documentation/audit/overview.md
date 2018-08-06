@@ -39,9 +39,7 @@ An example event object is 'updating a number' which has `event_type` of `NUMBER
 
 ## Getting Started
 
-### Using the API
-
-The [Audit API](/api/audit). With this API you can:
+With this API you can:
 
 * Retrieve a list of Audit events.
 * Retrieve a specific Audit event.
