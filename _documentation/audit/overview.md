@@ -22,11 +22,9 @@ In this document you can learn about:
 
 ## Concepts
 
-* **Authentication** - interactions with the Audit API are authenticated using Basic Authentication. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests.
+**Authentication** - interactions with the Audit API are authenticated using Basic Authentication. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests. For more information see [authenticating your applications](/concepts/guides/authentication).
 
-For more information see [authenticating your applications](/concepts/guides/authentication).
-
-* **Audit Event** - Audit Events are activities that occur when a user interacts with the Nexmo API or the Nexmo Dashboard. Audit events are represented by a JSON object. Examples of audit events include user login, logout, and application created. Further information on types of audit events is given in the [Audit Event Guide](/audit/guides/audit-events).
+**Audit Event** - Audit Events are activities that occur when a user interacts with the Nexmo API or the Nexmo Dashboard. Audit events are represented by a JSON object. Examples of audit events include user login, logout, and application created. Further information on types of audit events is given in the [Audit Event Guide](/audit/guides/audit-events).
 
 An example event object is 'updating a number' which has `event_type` of `NUMBER_UPDATED`:
 
