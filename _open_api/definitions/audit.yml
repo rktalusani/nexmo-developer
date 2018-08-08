@@ -21,6 +21,7 @@ servers:
 paths:
   '/beta/audit/events':
     get:
+      operationId: getEvents
       summary: Retrieve audit events
       description: >
         Get a series of audit events describing changes made to your
@@ -49,6 +50,7 @@ paths:
                 $ref: '#/components/schemas/ErrorUnauthorized'
   '/beta/audit/events/{id}':
     get:
+      operationId: getEvent
       summary: Retrieve individual audit event
       description: >
         Get the specified audit event.
