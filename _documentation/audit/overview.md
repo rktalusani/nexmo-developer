@@ -6,8 +6,14 @@ description: The Audit API overview.
 
 # Audit API Overview
 
-The Nexmo Audit API allows you to track events. These events are activities created by using the API or 
-by interacting with the Nexmo Dashboard. The Audit API allows you to monitor your Nexmo account.
+The Nexmo Audit API allows you to track events. These events are activities created by using the API or by interacting with the Nexmo Dashboard. The Audit API allows you to monitor your Nexmo account.
+
+With this API you can:
+
+* Retrieve a list of Audit events.
+* Retrieve a specific Audit event.
+
+It is possible to filter the events retrieved based on parameters such as date, user ID, and event type.
 
 ## Contents
 
@@ -22,11 +28,23 @@ In this document you can learn about:
 
 ## Concepts
 
-**Authentication** - interactions with the Audit API are authenticated using Basic Authentication. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests. For more information see [authenticating your applications](/concepts/guides/authentication).
+### Authentication
 
-**Audit Event** - Audit Events are activities that occur when a user interacts with the Nexmo API or the Nexmo Dashboard. Audit events are represented by a JSON object. Examples of audit events include user login, logout, and application created. Further information on types of audit events is given in the [Audit Event Guide](/audit/guides/audit-events).
+Interactions with the Audit API are authenticated using Basic Authentication. Basic Authentication allows you to use your `NEXMO_API_KEY` and `NEXMO_API_SECRET` to validate your API requests. For more information see [authenticating your applications](/concepts/guides/authentication).
 
-An example event object is 'updating a number' which has `event_type` of `NUMBER_UPDATED`:
+### Audit Events
+
+Audit Events are activities that occur when a user interacts with the Nexmo API or the Nexmo Dashboard. Audit events are represented by a JSON object. Examples of audit events include:
+
+* Account settings updates.
+* A Nexmo Number gets assigned to an application.
+* Creation of a Nexmo application.
+
+Further information on types of audit events is given in the [Audit Event Guide](/audit/guides/audit-events).
+
+### Audit Event object
+
+An example audit event object is 'updating a number' which has `event_type` of `NUMBER_UPDATED`:
 
 ``` json
 {
@@ -38,11 +56,6 @@ An example event object is 'updating a number' which has `event_type` of `NUMBER
 ```
 
 ## Getting Started
-
-With this API you can:
-
-* Retrieve a list of Audit events.
-* Retrieve a specific Audit event.
 
 This example shows you how to get started with the Audit API. It will retrieve a list of audit events:
 
