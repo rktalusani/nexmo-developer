@@ -33,11 +33,33 @@ paths:
           required: false
           schema:
             $ref: '#/components/schemas/EventTypes'
+        - name: date_from
+          description: Start of time range for audit events.
+          in: query
+          required: false
+        - name: date_to
+          description: End of time range for audit events.
+          in: query
+          required: false
+        - name: user
+          description: Return only audit events for this user ID (must be the UUID of a user resource).
+          in: query
+          required: false
+        - name: search_text
+          description: Return only audit events where the JSON object contains this search text. Must be legal text for a JSON attribute value, that is quotes and braces must be escaped.
+          in: query
+          required: false         
       security:
         - basicAuth: []
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditResp'
+        '400':
+          description: Bad request could be caused by invalid query parameters or invalid format parameter.
           content:
             application/json:
               schema:
@@ -64,11 +86,13 @@ paths:
             type: string
       responses:
         '200':
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuditEvent'
         '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -78,7 +102,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorIndividualNotFound'
-
 
 components:
   schemas:
@@ -112,27 +135,34 @@ components:
       properties:
         id:
           type: string
-          description: "UUID of the event"
+          description: "UUID of the audit event"
           example: "aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
         event_type:
-          $ref: '#/components/schemas/EventTypes'
+          type: string
+          description: "The type of the audit event."
+          schema:
+            $ref: '#/components/schemas/EventTypes'
         event_type_description:
           type: string
           description: "A description of the event type"
-          example: "Application created"
+          example: "Application created."
         created_at:
           type: string
+          description: "When the audit event was created."
           format: date
         user_email:
           type: string
+          description: "Email of the user whose account the audit event is associated with."
           format: email
           example: user@example.org
         user_id:
           type: integer
-          example: 123456
+          description: "The UUID of the user that the audit event is associated with."  
+          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
         account_id:
           type: string
-          example: "abcdef01"
+          description: "The NEXMO_API_KEY of the Nexmo account that the audit event is associated with."
+          example: "abcd1234"
         source:
           type: string
           description: >
@@ -151,6 +181,7 @@ components:
           example: "192.0.2.0"
         source_description:
           type: string
+          description: "Description of the audit event source."
           format: A human readable description of the `source`.
           enum:
             - Customer dashboard
