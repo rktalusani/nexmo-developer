@@ -15,6 +15,14 @@ With this API you can:
 
 It is possible to filter the events retrieved based on parameters such as date, user ID, and event type.
 
+## Developer Preview
+
+This API is currently in Developer Preview.
+
+Nexmo always welcomes your feedback. Your suggestions help us improve the product. If you do need help, please email [support@nexmo.com](mailto:support@nexmo.com) and include Audit API in the subject line. Please note that during the Developer Preview period support times are limited to Monday to Friday.
+
+During Developer Preview Nexmo may expand the capabilities of the Audit API.
+
 ## Contents
 
 In this document you can learn about:
