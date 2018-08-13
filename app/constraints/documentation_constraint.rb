@@ -37,8 +37,7 @@ class DocumentationConstraint
       'number-insight',
       'account',
       'concepts',
-      'stitch/in-app-voice',
-      'stitch/in-app-messaging',
+      'stitch',
       'messages-and-workflows-apis/messages',
       'messages-and-workflows-apis/workflows',
     ]
