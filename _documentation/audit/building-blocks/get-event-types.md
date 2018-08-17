@@ -5,7 +5,7 @@ navigation_weight: 4
 
 # Get audit event types
 
-In this building block you see how to get a list of all supported event types and source types.
+In this building block you see how to get a list of all supported event types.
 
 ## Example
 
@@ -24,7 +24,7 @@ application:
 
 ## Try it out
 
-Run the command in a shell. The call will retrieve a list of supported audit event types and source types, similar to the following:
+Run the command in a shell. The call will retrieve a list of supported audit event types, similar to the following:
 
 ```
 {
