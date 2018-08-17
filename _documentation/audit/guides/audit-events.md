@@ -30,8 +30,8 @@ The following table lists currently supported Audit Event types:
 | USER_API_KEYS_UPDATE | Sub-accounts for user updated |
 | USER_BILLING_UPDATE | User billing updated |
 | USER_CREATE | User created |
-| USER_LOGIN | User login (Premium Support only) |
-| USER_LOGOUT | User logout (Premium Support only) |
+| USER_LOGIN | User login **(Premium Support only)** |
+| USER_LOGOUT | User logout **(Premium Support only)** |
 | USER_STATUS | User status updated |
 | USER_UPDATE | User updated |
 | IP_WHITELIST_CREATE | Whitelist IP added |
