@@ -10,7 +10,7 @@ Audit Events are generated automatically by Nexmo as the user interacts with eit
 
 ## Audit Event types
 
-The following table lists all the supported Audit Event types:
+The following table lists currently supported Audit Event types:
 
 | Audit Event Type | Description |
 |----|----|
@@ -36,6 +36,10 @@ The following table lists all the supported Audit Event types:
 | USER_UPDATE | User updated |
 | IP_WHITELIST_CREATE | Whitelist IP added |
 | IP_WHITELIST_CREATE | Whitelist IP deleted |
+
+> **NOTE:** The list of supported event types does change from time to time. For this reason the `OPTIONS` method is provided to return event types and source types. You can see how to return the definitive list of event types from the [Get event types Building Block](/audit/building-blocks/get-event-types)
+
+## Audit event objects
 
 When you retrieve Audit Events objects via the API they will each have an `event_type` field, where the `event_type` will be an entry from the table above. In addition the Audit Event object contains other metadata depending on the type.
 
