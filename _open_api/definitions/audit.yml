@@ -164,6 +164,7 @@ components:
       properties:
         _embedded:
           type: object
+          description: Container containing the `events` array.
           properties:
             events:
               type: array
@@ -171,9 +172,11 @@ components:
                 $ref: '#/components/schemas/AuditEvent'
         _links:
           type: object
+          description: Container containing self, next and last page links.
           $ref: '#/components/schemas/PaginationLinks'
         page:
           type: object
+          description: Page containing results.
           $ref: '#/components/schemas/PaginationData'
 
     AuditEvent:
@@ -264,6 +267,7 @@ components:
       properties:
         eventTypes:
           type: array
+          description: An array of audit event types.
           items:
             $ref: '#/components/schemas/AuditEventType'
 
@@ -295,6 +299,7 @@ components:
 
     PaginationLinks:
       type: object
+      description: Pagination links
       properties:
         self:
           type: object
@@ -323,6 +328,7 @@ components:
 
     PaginationData:
       type: object
+      description: Pagination data.
       properties:
         size:
           type: integer
