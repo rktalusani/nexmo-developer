@@ -82,6 +82,7 @@ application:
 * [Get Audit events](/audit/building-blocks/get-events)
 * [Get Audit event](/audit/building-blocks/get-event)
 * [Get Audit events with filtering](/audit/building-blocks/get-events-with-filtering)
+* [Get Audit event types](/audit/building-blocks/get-event-types)
 
 ## Tutorials
 
