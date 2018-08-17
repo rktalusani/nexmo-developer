@@ -30,7 +30,6 @@ Parameter | Description
 `search_text` | JSON compatible search string. Look for specific text in an audit event.
 `date_from` | Retrieve audit events from this date (in ISO-8601 format).
 `date_to` | Retrieve audit events to this date (in ISO-8601 format).
-`user` | The UUID for a specific user. This allows you to retrieve audit events for a specific user.
 
 ## Try it out
 

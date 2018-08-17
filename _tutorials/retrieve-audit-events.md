@@ -51,7 +51,6 @@ Parameter | Description
 `search_text` | JSON compatible search string. Look for specific text in an audit event.
 `date_from` | Retrieve audit events from this date (in ISO-8601 format).
 `date_to` | Retrieve audit events to this date (in ISO-8601 format).
-`user` | The UUID for a specific user. This allows you to retrieve audit events for a specific user.
 
 So for example, to filter based on dates you can enter the following command:
 
@@ -71,7 +70,7 @@ $  curl "https://api.nexmo.com/beta/audit/events?date_from=2018-08-01&date_to=20
      -u 'NEXMO_API_KEY:NEXMO_API_SECRET'
 ```
 
-You can further filter based on `user` and also `search_text`. For example to find all audit events contaning the text "password" you can enter the following command:
+You can further filter based on `search_text`. For example to find all audit events contaning the text "password" you can enter the following command:
 
 ```
 $  curl "https://api.nexmo.com/beta/audit/events?search_text=password" \
