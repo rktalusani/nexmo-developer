@@ -1,4 +1,5 @@
 openapi: "3.0.0"
+
 info:
   version: 1.0.0
   title: Nexmo Audit API
@@ -16,8 +17,10 @@ info:
   x-logo:
     url: 'https://twitter.com/Nexmo/profile_image?size=original'
   x-apiClientRegistration: 'https://dashboard.nexmo.com/sign-up'
+
 servers:
   - url: https://api.nexmo.com
+
 paths:
   '/beta/audit/events':
     get:
@@ -41,10 +44,6 @@ paths:
           description: End of time range for audit events.
           in: query
           required: false
-        - name: user
-          description: Return only audit events for this user ID (must be the UUID of a user resource).
-          in: query
-          required: false
         - name: search_text
           description: Return only audit events where the JSON object contains this search text. Must be legal text for a JSON attribute value, that is quotes and braces must be escaped.
           in: query
@@ -59,17 +58,40 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuditResp'
         '400':
-          description: Bad request could be caused by invalid query parameters or invalid format parameter.
+          description: Bad request caused by invalid query parameters or invalid format parameter.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuditResp'
+                $ref: '#/components/schemas/ErrorBadRequest'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorUnauthorized'
+
+    options:
+      operationId: getEventTypes
+      summary: Retrieve audit events types
+      description: >
+        Get audit event types.
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditEventTypesResp'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorUnauthorized'
+
+  # GET event
   '/beta/audit/events/{id}':
     get:
       operationId: getEvent
@@ -108,12 +130,35 @@ components:
     EventTypes:
       type: string
       enum:
-        - APP_CREATE
+        - USER_STATUS
+        - USER_UPDATE
+        - USER_BILLING_UPDATE
+        - USER_CREATE
+        - USER_LOGIN
+        - USER_LOGOUT
+        - USER_PRODUCT_SEARCH
+        - USER_API_KEYS_UPDATE
+        - ACCOUNT_SECRET_DELETE
+        - ACCOUNT_SECRET_CREATE
+        - ACCOUNT_UPDATE_SPAMMER
+        - ACCOUNT_UPDATE_SETTINGS_API
         - NUMBER_ASSIGN
+        - NUMBER_UPDATED
+        - NUMBER_RELEASE
         - NUMBER_LINKED
         - NUMBER_UNLINKED
-        - NUMBER_UPDATED
+        - APP_CREATE
+        - APP_UPDATE
+        - APP_DELETE
+        - APP_DISABLE
+        - APP_ENABLE
+        - IP_WHITELIST_CREATE
+        - IP_WHITELIST_DELETE
+        - AUTORELOAD_ENABLE
+        - AUTORELOAD_UPDATE
+        - AUTORELOAD_DISABLE
       example: APP_CREATE
+
     AuditResp:
       type: object
       properties:
@@ -130,6 +175,7 @@ components:
         page:
           type: object
           $ref: '#/components/schemas/PaginationData'
+
     AuditEvent:
       type: object
       properties:
@@ -140,6 +186,7 @@ components:
         event_type:
           type: string
           description: "The type of the audit event."
+          example: "APP_CREATE"
           schema:
             $ref: '#/components/schemas/EventTypes'
         event_type_description:
@@ -149,6 +196,7 @@ components:
         created_at:
           type: string
           description: "When the audit event was created."
+          example: "2018-07-04T11:41:32"
           format: date
         user_email:
           type: string
@@ -157,8 +205,8 @@ components:
           example: user@example.org
         user_id:
           type: integer
-          description: "The UUID of the user that the audit event is associated with."  
-          example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+          description: "The ID of the user that the audit event is associated with."  
+          example: 1234567
         account_id:
           type: string
           description: "The NEXMO_API_KEY of the Nexmo account that the audit event is associated with."
@@ -184,12 +232,12 @@ components:
           description: "Description of the audit event source."
           format: A human readable description of the `source`.
           enum:
-            - Customer dashboard
+            - Customer Dashboard
             - Developer API
-          example: Customer dashboard
+          example: Customer Dashboard
         source_country:
           type: string
-          description: ISO country code recorded for the event.
+          description: ISO 3166-1 Alpha-2 country code recorded for the event.
           example: GB
         _links:
           $ref: '#/components/schemas/EventSelfLinkObject'
@@ -210,6 +258,29 @@ components:
               event_url:
                 method: POST
                 url: https://example.org/event
+
+    AuditEventTypesResp:
+      type: object
+      properties:
+        eventTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventType'
+
+    AuditEventType:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "APP_CREATE"
+          description: "The type of the audit event."
+          schema:
+            $ref: '#/components/schemas/EventTypes'
+        description:
+          type: string
+          example: "Application created."
+          description: "A description of the event type"
+ 
     EventSelfLinkObject:
       type: object
       properties:
@@ -221,6 +292,7 @@ components:
               format: uri
               description: URI of this document.
               example: "https://api.nexmo.com/beta/audit/events/aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
+
     PaginationLinks:
       type: object
       properties:
@@ -248,16 +320,20 @@ components:
               format: uri
               description: URI of the last document in the sequence.
               example: "http://api.nexmo.com/beta/audit/events?page=2&size=30"
+
     PaginationData:
       type: object
       properties:
         size:
           type: integer
-          example: 30
-          description: The total number of items in this response.
+          minimum: 1
+          maximum: 100
+          default: 30
+          example: 100
+          description: The total number of items in this response (page).
         totalElements:
           type: integer
-          example: 40
+          example: 120
           description: The total number of items across all pages.
         totalPages:
           type: integer
@@ -267,6 +343,7 @@ components:
           type: integer
           example: 1
           description: Which page of the pagination sequence you are looking at.
+
     CallbackUrl:
       type: object
       properties:
@@ -282,6 +359,7 @@ components:
           example: "https://example.org/my-app-callback"
           format: url
           description: "The URL used for a callback to your application"
+
     ContextAppCreate:
       type: object
       properties:
@@ -308,6 +386,7 @@ components:
               type: string
               example: "voice"
               description: "The type of application created"
+
     ContextNumberLinking:
       type: object
       properties:
@@ -327,6 +406,7 @@ components:
           type: string
           description: "UUID of the app the number is being linked/unlinked to"
           example: "aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
+
     ContextNumberUpdate:
       type: object
       properties:
@@ -355,6 +435,23 @@ components:
           format: url
           description: "The URL of the endpoint the number has been forwarded to"
           example: "https://example.org/my-app-callback"
+
+    ErrorBadRequest:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+          description: The HTTP Status code of the error
+        error:
+          type: string
+          example: BadRequest
+          description: A human readable description of the error
+        message:
+          type: string
+          example: "This was a bad request."
+          description: A longer description of the error
+
     ErrorUnauthorized:
       type: object
       properties:
@@ -370,6 +467,7 @@ components:
           type: string
           example: "Full authentication is required. JWT was not found in \"Authorization\" HTTP header."
           description: A longer description of the error
+
     ErrorIndividualNotFound:
       type: object
       properties:
@@ -385,6 +483,7 @@ components:
           type: string
           example: "Event with provided id: aaaaaaaa-bbbb-cccc-dddd-0123456789ab was not found"
           description: A longer description of the error
+
   securitySchemes:
     basicAuth:
       type: http
