@@ -45,12 +45,19 @@ When you run this command you will receive a list of all audit events.
 
 The list of audit events you receive in the previous step may well be overwhelming, especially if you have been using your Nexmo account for some time. You can filter this list based on several parameters:
 
-Parameter | Description
--- | --
-`event_type` | The type of the audit event (for example: APP_CREATE, NUMBER_ASSIGN, etc.)
+Query Parameter | Description
+--- | ---
+`event_type` | The type of the audit event, for example: `APP_CREATE`, `NUMBER_ASSIGN`, and so on. You can specify a comma-delimited list of [event types](/audit/guides/audit-events#audit-event-types) here.
 `search_text` | JSON compatible search string. Look for specific text in an audit event.
 `date_from` | Retrieve audit events from this date (in ISO-8601 format).
 `date_to` | Retrieve audit events to this date (in ISO-8601 format).
+`admin_email` | Email of a Nexmo admin that triggered an event.
+`user_email` | Email of a user that triggered an event.
+`account_id` | Nexmo API key.
+`only_by_admin` | Nexmo Admin events only. Set to true, false or empty.
+`page` | Page number starting with page 1.
+`size` | Number of elements per page (between 1 and 100, default 30).
+
 
 So for example, to filter based on dates you can enter the following command:
 
