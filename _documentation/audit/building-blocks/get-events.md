@@ -9,7 +9,7 @@ In this building block you see how to get a list of audit events.
 
 ## Example
 
-Replace the following variables in the example code:
+Ensure that the following variables are set using any convenient method:
 
 Key | Description
 -- | --

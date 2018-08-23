@@ -9,7 +9,7 @@ In this building block you see how to get a single audit event, referenced by it
 
 ## Example
 
-Replace the following variables in the example code:
+Ensure that the following variables are set using any convenient method:
 
 Key | Description
 -- | --
