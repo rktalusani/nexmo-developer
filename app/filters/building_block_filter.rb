@@ -1,4 +1,6 @@
 class BuildingBlockFilter < Banzai::Filter
+  include OcticonsHelper
+
   def call(input)
     input.gsub(/```single_building_block(.+?)```/m) do |_s|
       config = YAML.safe_load($1)
@@ -32,6 +34,7 @@ class BuildingBlockFilter < Banzai::Filter
         client_html = ERB.new(erb).result(binding)
       end
 
+      lang = config['title'].delete('.')
       erb = File.read("#{Rails.root}/app/views/building_blocks/_write_code.html.erb")
       code_html = ERB.new(erb).result(binding)
 
