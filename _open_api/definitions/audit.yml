@@ -47,29 +47,9 @@ paths:
           description: End of time range for audit events. DateTime in ISO-8601 format.
           in: query
           required: false
-        - name: admin_email
-          type: string  
-          description: Email of a Nexmo admin that triggered an event.
-          in: query
-          required: false
-        - name: user_email
-          type: string  
-          description: Email of a user that triggered an event.
-          in: query
-          required: false
-        - name: account_id
-          type: string  
-          description: Nexmo API key.
-          in: query
-          required: false
         - name: search_text
           type: string
           description: Return only audit events where the JSON object contains this search text. Must be legal text for a JSON attribute value, that is quotes and braces must be escaped.
-          in: query
-          required: false         
-        - name: only_by_admin
-          type: string
-          description: Nexmo Admin events only. Set to true, false or empty.
           in: query
           required: false         
         - name: page

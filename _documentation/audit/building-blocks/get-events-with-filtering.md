@@ -17,9 +17,6 @@ Query Parameter | Description
 `search_text` | JSON compatible search string. Look for specific text in an audit event.
 `date_from` | Retrieve audit events from this date (in ISO-8601 format).
 `date_to` | Retrieve audit events to this date (in ISO-8601 format).
-`user_email` | Email of a user that triggered an event.
-`account_id` | Nexmo API key.
-`only_by_admin` | Nexmo Admin events only. Set to true, false or empty.
 `page` | Page number starting with page 1.
 `size` | Number of elements per page (between 1 and 100, default 30).
 
