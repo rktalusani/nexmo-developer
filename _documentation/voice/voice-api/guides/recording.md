@@ -40,8 +40,7 @@ When recording a call, you can enable split recording which will result in the r
 
 ## Multi channel recording
 
-When recording a call, you can enable mutli channel recording which allows up to 32 call legs to be recorded seprately. One file with the amount of channels set will be retunred. 
-
+When recording a call, you can enable mutli channel recording which allows up to 32 call legs to be recorded separately. One file with the number of channels set will be returned.
 ## File formats
 
 * Nexmo supports recording in MP3 or WAV format, the default is MP3.
