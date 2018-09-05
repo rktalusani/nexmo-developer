@@ -37,7 +37,7 @@ navigation_weight:
 
 navigation_overrides:
   audit:
-    label: 'Developer Preview'
+    label: 'Beta'
   redact:
     label: 'Developer Preview'
   stitch:
